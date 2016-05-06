@@ -23,7 +23,7 @@ public class PathReader : MonoBehaviour {
 
 	private double trueSpeed;
 
-
+	private Vector2 initPos;
 	private List<string> x_param, y_param;
 
 
@@ -52,6 +52,8 @@ public class PathReader : MonoBehaviour {
 	*/
 
 	void Start () {
+		initPos = transform.position;
+		
 		x_param = PathInterpreter.infix_to_postfix (XCoordinate);
 		y_param = PathInterpreter.infix_to_postfix (YCoordinate);
 		param = startingParameter;
@@ -85,7 +87,7 @@ public class PathReader : MonoBehaviour {
 		double xcoord = get_coord (param, x_param);
 		double ycoord = get_coord (param, y_param);
 
-		transform.position = new Vector2 ((float)xcoord, (float)ycoord);
+		transform.position = initPos + new Vector2 ((float)xcoord, (float)ycoord);
 	}
 
 	double get_coord(double x, List<string> param) {
